@@ -1,0 +1,356 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+.box {
+  height: 130px;
+  width: 130px;
+  bottom: 15%;
+  right: 10%;
+  position: absolute;
+  overflow: hidden;
+}
+.box .percent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 30px;
+}
+.box .water {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+  background: #69e2fe;
+}
+.box .water_wave {
+  width: 200%;
+  position: absolute;
+  bottom: 100%;
+}
+.box .water_wave_back {
+  right: 0;
+  fill: #C7EEFF;
+  -webkit-animation: wave-back 2.0s infinite linear;
+          animation: wave-back 2.0s infinite linear;
+}
+.box .water_wave_front {
+  left: 0;
+  fill: #69e2fe;
+  margin-bottom: -1px;
+  -webkit-animation: wave-front 1.0s infinite linear;
+          animation: wave-front 1.0s infinite linear;
+}
+
+@-webkit-keyframes wave-front {
+  100% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+  }
+}
+
+@keyframes wave-front {
+  100% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+  }
+}
+@-webkit-keyframes wave-back {
+  100% {
+    -webkit-transform: translate(50%, 0);
+            transform: translate(50%, 0);
+  }
+}
+@keyframes wave-back {
+  100% {
+    -webkit-transform: translate(50%, 0);
+            transform: translate(50%, 0);
+  }
+}
+
+
+
+.pila-buttons-bg {
+    height: 100vh;
+    background: white;
+    padding-top: 65px;
+    min-height: 600px;
+}
+
+.dashboard-bg {
+    min-height: 100vh;
+    background: #EFF0F4;
+    padding-top: 60px;
+    height: auto;
+}
+
+#drop-image {
+    margin-top: -6px;
+}
+
+h1 {
+    color: black;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.separator {
+    height: 1px;
+    width: 100%;
+    display: block;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+.navbar-brand {
+    font-family: 'Varela Round', sans-serif;
+}
+
+.varela-font {
+    font-family: 'Varela Round', sans-serif;
+}
+
+.margen-grande {
+    margin: 3vh;
+}
+
+.centrado {
+    margin-left: auto;
+    margin-right: auto;
+    display: center;
+}
+
+.text-azul {
+    color: #2EC0F9;
+}
+
+.margin-top {
+    margin-top: 6vh;
+}
+#logout-button {
+    color: red
+}
+
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tile-section{
+  background-color: white;
+  padding: 20px;
+  height: 237px;
+  -webkit-box-shadow: 0px 0px 10px 0px #D7D8DC;
+  -moz-box-shadow: 0px 0px 10px 0px #D7D8DC;
+  box-shadow: 0px 0px 10px 0px #D7D8DC;
+}
+
+.no-padding{
+  padding: 0 15px;
+}
+
+#water-level{
+  width: 75%;
+  height: 150px;
+  margin: 0 auto;
+}
+
+
+/*WATER LEVEL SECTION*/
+.water-level-section h2, h2{
+  color: #757F81;
+  text-transform: uppercase;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.water-level-section p{
+  color: #E6E7E8;
+  font-size: 16px;
+  position: absolute;
+  top: 60%;
+  text-transform: uppercase;
+  right: 17%;
+}
+
+.water-level-section ul{
+  padding-left: 0px;
+  list-style-type: none;
+  max-width: 48%;
+  margin-top: 45px;
+}
+
+.water-level-section li{
+  color: #757F81;
+  margin: 15px 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+
+
+/*WEATHER*/
+.weather-day-section{
+  display: flex;
+  text-align: center;
+  height: 237px;
+}
+
+.weather-day-item{
+  border-right: 1px solid #D7D8DC;
+  width: 15%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.last{
+  border: none;
+}
+.weather-day-item h1,.weather-day-item h2{
+  color: #778183;
+  font-size: 13px;
+}
+
+.weather-day-item h2{
+  margin-top: 10px;
+}
+
+.weather-day-item img{
+  height: 40px;
+}
+
+.weather-day-item .daily-rain-level{
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.margin-tb{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.text-center{
+  text-align: center;
+}
+.height-auto{
+  height: auto;
+  padding: 20px;
+  min-height: 435px;
+}
+.circle {
+  background: rgb(99, 204, 228);
+  border-radius: 100px;
+  height: 10px;
+  width: 10px;
+}
+@media screen and (max-width:992px) {
+  .height-auto{min-height: 0px;}
+}
+
+@media screen and (max-width:425px) {
+  .tile-section{height: auto;}
+  .weather-day-section{height: auto;flex-wrap: wrap;}
+  .weather-day-item{width: 50%; border-bottom: 1px solid #D7D8DC; padding: 8px 0;}
+  .weather-day-section .last{width: 100%;}
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.clock{
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+  border-top: 1px solid lightgray;
+}
+
+.count-section{
+  padding: 10px 25px;
+}
+
+.clock-label{color: #757F81}

@@ -1,0 +1,1 @@
+var User = require('../models/user'); // get the mongoose model

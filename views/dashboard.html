@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Raincube-Garden</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='css/timepicki.css' />
+    <!--    Google Fonts    -->
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <!--  Favicon  -->
+    <link rel="apple-touch-icon" sizes="57x57" href="./images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#2EC0F9">
+    <meta name="msapplication-TileImage" content="./images/ms-icon-144x144.png">
+    <meta name="theme-color" content="#2EC0F9">
+  </head>
+
+  <body id="main-background">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="navbar-brand" id="drop-image"><img src="./images/favicon-32x32.png"></a>
+          <a href="/" class="navbar-brand"><strong>Rain</strong>cube</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <!--                    <li class="text-azul"><a href="#dashboard" class="varela-font">Dashboard</a></li>-->
+            <li><a href="/logout" class="varela-font" id="logout-button">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="dashboard-bg varela-font" id="dashboard">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-xs-12 margin-tb">
+            <div class='water-level-section tile-section'>
+              <h2>Current Water Level</h2>
+              <ul>
+                <li>435/500G</li>
+                <li>YTD: 936G</li>
+                <li>RAINCOIN: 9.36</li>
+              </ul>
+              <div>
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" style="display: none;">
+                  <symbol id="wave">
+                    <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z"></path>
+                    <path d="M420,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C326,6.5,322,4.7,311.5,2.7C304.3,1.4,293.6-0.1,280,0c0,0,0,0,0,0v20H420z"></path>
+                    <path d="M140,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C234,6.5,238,4.7,248.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H140z"></path>
+                    <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"></path>
+                  </symbol>
+                </svg>
+                <div class="box">
+                  <div class="percent">
+                    <div class="percentNum" id="count">0</div>
+                    <div class="percentB">%</div>
+                  </div>
+                  <div id="water" class="water">
+                    <svg viewBox="0 0 560 20" class="water_wave water_wave_back">
+                      <use xlink:href="#wave"></use>
+                    </svg>
+                    <svg viewBox="0 0 560 20" class="water_wave water_wave_front">
+                      <use xlink:href="#wave"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 col-xs-12 margin-tb">
+            <div class='tile-section no-padding'>
+              <div class="row weather-day-section">
+                <div class="weather-day-item" id='weather-0'>
+                  <div>
+                    <h1>SUN</h1>
+                    <img src='./images/rc_sunny.svg' alt="">
+                    <h2>Sunny</h2>
+                  </div>
+                  <div>
+                    <h2>0%</h2>
+                    <div class="daily-rain-level">
+                      <div class="circle"></div>
+                    </div>
+                    <h2>0 in</h2>
+                  </div>
+                </div>
+                <div class="weather-day-item" id='weather-1'>
+                  <div>
+                    <h1>SUN</h1>
+                    <img src='./images/rc_sunny.svg' alt="">
+                    <h2>Sunny</h2>
+                  </div>
+                  <div>
+                    <h2>0%</h2>
+                    <div class="daily-rain-level">
+                      <div class="circle"></div>
+                    </div>
+                    <h2>0 in</h2>
+                  </div>
+                </div>
+                <div class="weather-day-item" id='weather-2'>
+                  <div>
+                    <h1>SUN</h1>
+                    <img src='./images/rc_sunny.svg' alt="">
+                    <h2>Sunny</h2>
+                  </div>
+                  <div>
+                    <h2>0%</h2>
+                    <div class="daily-rain-level">
+                      <div class="circle"></div>
+                    </div>
+                    <h2>0 in</h2>
+                  </div>
+                </div>
+                <div class="weather-day-item" id='weather-3'>
+                  <div>
+                    <h1>SUN</h1>
+                    <img src='./images/rc_sunny.svg' alt="">
+                    <h2>Sunny</h2>
+                  </div>
+                  <div>
+                    <h2>0%</h2>
+                    <div class="daily-rain-level">
+                      <div class="circle"></div>
+                    </div>
+                    <h2>0 in</h2>
+                  </div>
+                </div>
+                <div class="weather-day-item" id='weather-4'>
+                  <div>
+                    <h1>SUN</h1>
+                    <img src='./images/rc_sunny.svg' alt="">
+                    <h2>Sunny</h2>
+                  </div>
+                  <div>
+                    <h2>0%</h2>
+                    <div class="daily-rain-level">
+                      <div class="circle"></div>
+                    </div>
+                    <h2>0 in</h2>
+                  </div>
+                </div>
+                <div class="weather-day-item" id='weather-5'>
+                  <div>
+                    <h1>SUN</h1>
+                    <img src='./images/rc_sunny.svg' alt="">
+                    <h2>Sunny</h2>
+                  </div>
+                  <div>
+                    <h2>0%</h2>
+                    <div class="daily-rain-level">
+                      <div class="circle"></div>
+                    </div>
+                    <h2>0 in</h2>
+                  </div>
+                </div>
+                <div class="weather-day-item last" id='weather-6'>
+                  <div>
+                    <h1>SUN</h1>
+                    <img src='./images/rc_sunny.svg' alt="">
+                    <h2>Sunny</h2>
+                  </div>
+                  <div>
+                    <h2>0%</h2>
+                    <div class="daily-rain-level">
+                      <div class="circle"></div>
+                    </div>
+                    <h2>0 in</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Raincube Level row end-->
+        <div class="row">
+          <div class="col-md-8 col-xs-12 margin-tb ">
+            <div class='tile-section no-padding height-auto'>
+              <h2>Monthy Water Collection and Distribution (G)</h2>
+              <div style="width='100%'">
+                <canvas id="line-chart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12 margin-tb">
+            <div class='tile-section no-padding height-auto'>
+              <h2>ZONE CONTROLS</h2>
+              <ul class="nav nav-tabs margin-tb" role="tablist">
+                <li role="presentation" class="active"><a href="#zone-1" aria-controls="home" role="tab" data-toggle="tab">ZONE 1</a></li>
+                <li role="presentation"><a href="#zone-2" aria-controls="profile" role="tab" data-toggle="tab">ZONE 2</a></li>
+                <li role="presentation"><a href="#zone-3" aria-controls="messages" role="tab" data-toggle="tab">ZONE 3</a></li>
+              </ul>
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active text-center margin-tb" id="zone-1">
+                  <!-- <label class="switch margin-tb">
+                          <input type="checkbox">
+                          <div class="slider round"></div>
+                        </label> -->
+                  <small style="padding-left:8px;">Length:</small>
+                  <div class="btn-group dropup">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='zone-1-button'>minutes <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href='#' onclick="setLength(5, 1)">5 minutes</a></li>
+                      <li><a href='#' onclick="setLength(10, 1)">10 minutes</a></li>
+                      <li><a href='#' onclick="setLength(15, 1)">15 minutes</a></li>
+                      <li><a href='#' onclick="setLength(20, 1)">20 minutes</a></li>
+                      <li><a href='#' onclick="setLength(25, 1)">25 minutes</a></li>
+                      <li><a href='#' onclick="setLength(25, 1)">30 minutes</a></li>
+                      <li><a href='#' onclick="setLength(35, 1)">35 minutes</a></li>
+                      <li><a href='#' onclick="setLength(40, 1)">40 minutes</a></li>
+                      <li><a href='#' onclick="setLength(45, 1)">45 minutes</a></li>
+                      <li><a href='#' onclick="setLength(50, 1)">50 minutes</a></li>
+                      <li><a href='#' onclick="setLength(55, 1)">55 minutes</a></li>
+                      <li><a href='#' onclick="setLength(60, 1)">60 minutes</a></li>
+                    </ul>
+                  </div>
+                  <br>
+                  <br>
+                  <button class="btn btn-default" onclick="startCountdown(1)">Start</button>
+                  <div id="zone-1-clock" class="clock">
+                    <div class="count-section">
+                      <h3 class="minutes">0</h3>
+                      <span class="clock-label">M</span>
+                    </div>
+                    <div class="count-section">
+                      <h3 class="seconds">0</h3>
+                      <span class="clock-label">S</span>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane text-center margin-tb" id="zone-2">
+                  <!-- <label class="switch margin-tb">
+                         <input type="checkbox">
+                         <div class="slider round"></div>
+                       </label> -->
+                  <small style="padding-left:8px;">Length:</small>
+                  <div class="btn-group dropup">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='zone-2-button'>minutes <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href='#' onclick="setLength(5, 2)">5 minutes</a></li>
+                      <li><a href='#' onclick="setLength(10, 2)">10 minutes</a></li>
+                      <li><a href='#' onclick="setLength(15, 2)">15 minutes</a></li>
+                      <li><a href='#' onclick="setLength(20, 2)">20 minutes</a></li>
+                      <li><a href='#' onclick="setLength(25, 2)">25 minutes</a></li>
+                      <li><a href='#' onclick="setLength(25, 2)">30 minutes</a></li>
+                      <li><a href='#' onclick="setLength(35, 2)">35 minutes</a></li>
+                      <li><a href='#' onclick="setLength(40, 2)">40 minutes</a></li>
+                      <li><a href='#' onclick="setLength(45, 2)">45 minutes</a></li>
+                      <li><a href='#' onclick="setLength(50, 2)">50 minutes</a></li>
+                      <li><a href='#' onclick="setLength(55, 2)">55 minutes</a></li>
+                      <li><a href='#' onclick="setLength(60, 2)">60 minutes</a></li>
+                    </ul>
+                  </div>
+                  <br>
+                  <br>
+                  <button class="btn btn-default" onclick="startCountdown(2)">Start</button>
+                  <div id="zone-2-clock" class="clock">
+                    <div class="count-section">
+                      <h3 class="minutes">0</h3>
+                      <span class="clock-label">M</span>
+                    </div>
+                    <div class="count-section">
+                      <h3 class="seconds">0</h3>
+                      <span class="clock-label">S</span>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane text-center margin-tb" id="zone-3">
+                  <!-- <label class="switch margin-tb">
+                         <input type="checkbox">
+                         <div class="slider round"></div>
+                       </label> -->
+                  <small style="padding-left:8px;">Length:</small>
+                  <div class="btn-group dropup">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='zone-3-button'>minutes <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href='#' onclick="setLength(5, 3)">5 minutes</a></li>
+                      <li><a href='#' onclick="setLength(10, 3)">10 minutes</a></li>
+                      <li><a href='#' onclick="setLength(15, 3)">15 minutes</a></li>
+                      <li><a href='#' onclick="setLength(20, 3)">20 minutes</a></li>
+                      <li><a href='#' onclick="setLength(25, 3)">25 minutes</a></li>
+                      <li><a href='#' onclick="setLength(25, 3)">30 minutes</a></li>
+                      <li><a href='#' onclick="setLength(35, 3)">35 minutes</a></li>
+                      <li><a href='#' onclick="setLength(40, 3)">40 minutes</a></li>
+                      <li><a href='#' onclick="setLength(45, 3)">45 minutes</a></li>
+                      <li><a href='#' onclick="setLength(50, 3)">50 minutes</a></li>
+                      <li><a href='#' onclick="setLength(55, 3)">55 minutes</a></li>
+                      <li><a href='#' onclick="setLength(60, 3)">60 minutes</a></li>
+                    </ul>
+                  </div>
+                  <br>
+                  <br>
+                  <button class="btn btn-default" onclick="startCountdown(3)">Start</button>
+                  <div id="zone-3-clock" class="clock">
+                    <div class="count-section">
+                      <h3 class="minutes">0</h3>
+                      <span class="clock-label">M</span>
+                    </div>
+                    <div class="count-section">
+                      <h3 class="seconds">0</h3>
+                      <span class="clock-label">S</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js'></script>
+    <script src="js/socket.io-1.3.7.js"></script>
+    <script type='text/javascript' src='js/moment.js'></script>
+    <script type='text/javascript' src='js/timepicki.js'></script>
+    <script type='text/javascript' src='js/spin.min.js'></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
+  </body>
+
+</html>
