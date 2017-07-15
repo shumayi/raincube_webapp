@@ -12,6 +12,7 @@ var router      = require('./router');
 var mongoose    = require('mongoose');
 var passport    = require('passport');
 var flash       = require('connect-flash');
+var path        = require('path');
 
 var configDB    = require('./app/config/database');
 
@@ -19,7 +20,8 @@ var mensajesMonitor = [];
 
 mongoose.connect(configDB.database);
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app_client')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -30,6 +32,10 @@ app.use(passport.session());
 app.use(flash());
 
 router(app, passport);
+
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
+});
 
 //VARIABLES PARA TCP.
 var TCP_PORT = process.env.TCP_PORT || 3160;

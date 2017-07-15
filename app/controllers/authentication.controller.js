@@ -1,3 +1,5 @@
+'use strict'
+
 var jwt = require('jsonwebtoken');
 var crypto = require('crypto');
 var User = require('../models/user');
@@ -25,10 +27,16 @@ exports.login = function (req, res, next) {
     var userInfo = setUserInfo(req.user);
 
     res.status(200).json({
-        toke: 'JWT ' + generateToken(userInfo),
+        token: generateToken(userInfo),
         user: userInfo
     });
 };
+
+exports.facebookLogin = function (req, res, next) {
+    var userInfo = setUserInfo(req.user);
+
+    res.redirect('/fb/' + generateToken(userInfo));
+}
 
 exports.register = function (req, res, next) {
     var username = req.body.email;
@@ -74,7 +82,7 @@ exports.register = function (req, res, next) {
             var userInfo = setUserInfo(user);
 
             res.status(201).json({
-                toke: 'JWT ' + generateToken(userInfo),
+                token: 'JWT ' + generateToken(userInfo),
                 user: userInfo
             });
         });

@@ -27,7 +27,7 @@ var jwtLogin = new JwtStrategy(jwtOptions, function(jwt_payload, done) {
 });
 
 var localOptions = {
-    usernameField: 'username',
+    usernameField: 'email',
     passwordFiled: 'password'
 };
 var localLogin = new LocalStrategy(localOptions, function (email, password, done) {
@@ -57,7 +57,8 @@ var localLogin = new LocalStrategy(localOptions, function (email, password, done
 var facebookOptions = {
     clientID: authConfig.facebookAuth.clientID,
     clientSecret: authConfig.facebookAuth.clientSecret,
-    callbackURL: authConfig.facebookAuth.callbackURL
+    callbackURL: authConfig.facebookAuth.callbackURL,
+    profileFields: authConfig.facebookAuth.profileFields
 }
 
 var facebookLogin = new FacebookStrategy(facebookOptions, function (token, refreshToken, profile, done) {

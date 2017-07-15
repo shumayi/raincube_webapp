@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/Raincube/raincube-v2#readme",
   "dependencies": {
+    "@google/maps": "^0.4.2",
+    "aws-iot-device-sdk": "^2.0.1",
     "aws-sdk": "^2.6.4",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "~1.9.2",
     "connect-flash": "^0.1.1",
+    "dark-sky": "^1.0.10",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "jsonwebtoken": "^7.4.1",
@@ -33,6 +36,17 @@
     "passport-facebook": "^2.1.1",
     "passport-jwt": "^2.0.0",
     "passport-local": "^1.0.0",
+    "rpi-gpio": "^0.8.1",
+    "rpio": "^0.9.17",
     "socket.io": "^1.4.8"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-ng-html2js": "^0.2.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-watch": "^4.3.4"
   }
 }
