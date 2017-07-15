@@ -48,15 +48,15 @@ module.exports = function (app, passport) {
             });
     });
 
-    // app.get('/awsiot', function (req, res) {
-    //     AWSIoTController.getIoTData()
-    //         .then(function (result) {
-    //             res.send(result);
-    //         })
-    //         .catch(function (err){
-    //             res.send('Unable to retrieve data from IoT device.');
-    //         });
-    // });
+    app.get('/awsiot', function (req, res) {
+        AWSIoTController.getIoTData()
+            .then(function (result) {
+                res.send(result);
+            })
+            .catch(function (err){
+                res.send('Unable to retrieve data from IoT device.');
+            });
+    });
 
     //Dashboards Route
     // app.get('/dashboard', function (req, res) {

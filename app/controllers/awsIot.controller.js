@@ -2,7 +2,6 @@
 
 const config = require('../config/auth')
 const awsIot = require('aws-iot-device-sdk')
-const rpio   = require('rpio')
 
 const TOPIC = 'raincube_pi'
 
@@ -16,13 +15,10 @@ function createAwsIotClient () {
         port: config.awsIot.port
     });
 
-    setupGPIO();
-
     device
         .on('connect', function() {
             console.log('connect');
             device.subscribe(TOPIC);
-            device.publish(TOPIC, JSON.stringify({ test_data: 1}));
         });
         
     device
@@ -33,11 +29,18 @@ function createAwsIotClient () {
     return device;
 }
 
-
+function composeMessage() {
+    return {
+        from: 'server',
+        to: 'RC00000000995cdc89',
+        type: 'action',
+        data: 'OP10001'
+    };
+}
 
 var getIoTData = function () {
     var device = createAwsIotClient();
-    var message = composeMessage('status');
+    var message = composeMessage();
 
     return new Promise(function (resolve, reject) {
         device.publish(TOPIC, JSON.stringify(message), function (err, data) {

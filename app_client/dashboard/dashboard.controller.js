@@ -22,7 +22,6 @@
     weather
         .getForecast('33569')
         .success(function(data) {
-            console.log(data.daily);
             setForecastData(data.daily.data);
         })
         .error(function (e) {
@@ -82,7 +81,6 @@
     }
 
     function getRainIntensityStyle(rainIntensity) {
-        console.log(rainIntensity);
         switch (true) {
             case (rainIntensity == 0):
                 return {height: "1px", width: "1px"};

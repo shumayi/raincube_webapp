@@ -15,7 +15,7 @@ module.exports = {
         'keyPath': '/Users/tommywu/Documents/raincube_pi/cert/c3daaa6759-private.pem.key',
         'certPath': '/Users/tommywu/Documents/raincube_pi/cert/c3daaa6759-certificate.pem.crt',
         'caPath': '/Users/tommywu/Documents/raincube_pi/cert/root_ca.crt',
-        'clientId': 'raincube_pi',
+        'clientId': 'raincube_pi_webapp',
         'host': 'a20mpokpemb1wi.iot.us-east-1.amazonaws.com',
         'port': 8883,
         'status_interval': 10,
