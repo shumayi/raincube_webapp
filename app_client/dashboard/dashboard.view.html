@@ -83,21 +83,10 @@
                 </label> -->
             <small style="padding-left:8px;">Length:</small>
             <div class="btn-group dropup">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='zone-1-button'>minutes <span class="caret"></span>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='zone-1-button'> {{vm.timeLength}} minutes <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href='#' onclick="setLength(5, 1)">5 minutes</a></li>
-                <li><a href='#' onclick="setLength(10, 1)">10 minutes</a></li>
-                <li><a href='#' onclick="setLength(15, 1)">15 minutes</a></li>
-                <li><a href='#' onclick="setLength(20, 1)">20 minutes</a></li>
-                <li><a href='#' onclick="setLength(25, 1)">25 minutes</a></li>
-                <li><a href='#' onclick="setLength(25, 1)">30 minutes</a></li>
-                <li><a href='#' onclick="setLength(35, 1)">35 minutes</a></li>
-                <li><a href='#' onclick="setLength(40, 1)">40 minutes</a></li>
-                <li><a href='#' onclick="setLength(45, 1)">45 minutes</a></li>
-                <li><a href='#' onclick="setLength(50, 1)">50 minutes</a></li>
-                <li><a href='#' onclick="setLength(55, 1)">55 minutes</a></li>
-                <li><a href='#' onclick="setLength(60, 1)">60 minutes</a></li>
+                <li ng-repeat="x in vm.timeInterval"><a href='#' ng-click="vm.setTime(x)">{{x}} minutes</a></li>
             </ul>
             </div>
             <br>
@@ -124,18 +113,7 @@
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='zone-2-button'>minutes <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href='#' onclick="setLength(5, 2)">5 minutes</a></li>
-                <li><a href='#' onclick="setLength(10, 2)">10 minutes</a></li>
-                <li><a href='#' onclick="setLength(15, 2)">15 minutes</a></li>
-                <li><a href='#' onclick="setLength(20, 2)">20 minutes</a></li>
-                <li><a href='#' onclick="setLength(25, 2)">25 minutes</a></li>
-                <li><a href='#' onclick="setLength(25, 2)">30 minutes</a></li>
-                <li><a href='#' onclick="setLength(35, 2)">35 minutes</a></li>
-                <li><a href='#' onclick="setLength(40, 2)">40 minutes</a></li>
-                <li><a href='#' onclick="setLength(45, 2)">45 minutes</a></li>
-                <li><a href='#' onclick="setLength(50, 2)">50 minutes</a></li>
-                <li><a href='#' onclick="setLength(55, 2)">55 minutes</a></li>
-                <li><a href='#' onclick="setLength(60, 2)">60 minutes</a></li>
+                <li ng-repeat="x in vm.timeInterval"><a href='#' ng-click="vm.setTime(x)">{{x}} minutes</a></li>
             </ul>
             </div>
             <br>
@@ -162,18 +140,7 @@
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='zone-3-button'>minutes <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href='#' onclick="setLength(5, 3)">5 minutes</a></li>
-                <li><a href='#' onclick="setLength(10, 3)">10 minutes</a></li>
-                <li><a href='#' onclick="setLength(15, 3)">15 minutes</a></li>
-                <li><a href='#' onclick="setLength(20, 3)">20 minutes</a></li>
-                <li><a href='#' onclick="setLength(25, 3)">25 minutes</a></li>
-                <li><a href='#' onclick="setLength(25, 3)">30 minutes</a></li>
-                <li><a href='#' onclick="setLength(35, 3)">35 minutes</a></li>
-                <li><a href='#' onclick="setLength(40, 3)">40 minutes</a></li>
-                <li><a href='#' onclick="setLength(45, 3)">45 minutes</a></li>
-                <li><a href='#' onclick="setLength(50, 3)">50 minutes</a></li>
-                <li><a href='#' onclick="setLength(55, 3)">55 minutes</a></li>
-                <li><a href='#' onclick="setLength(60, 3)">60 minutes</a></li>
+                <li ng-repeat="x in vm.timeInterval"><a href='#' ng-click="vm.setTime(x)">{{x}} minutes</a></li>
             </ul>
             </div>
             <br>

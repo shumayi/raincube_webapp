@@ -13,6 +13,10 @@
         </div>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="Zip Code" />
+            <i class="glyphicon glyphicon-home form-control-feedback"></i>
+        </li>
         <li ng-hide="navvm.isLoggedIn"><a href="login">Sign in</a></li>
         <li ng-show="navvm.isLoggedIn"><a href="profile">{{ navvm.currentUser.fullname }}</a></li>
         <li ng-show="navvm.isLoggedIn" class="varela-font" id="logout-button" ng-click="navvm.logout()"><a href="#">Logout</a></li>

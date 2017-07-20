@@ -29,18 +29,48 @@ function createAwsIotClient () {
     return device;
 }
 
-function composeMessage() {
+function composeMessage(from, to, actionType, data) {
     return {
-        from: 'server',
-        to: 'RC00000000995cdc89',
-        type: 'action',
-        data: 'OP10001'
+        from: from,
+        to: to,
+        type: actionType,
+        data: data
     };
 }
 
 var getIoTData = function () {
     var device = createAwsIotClient();
-    var message = composeMessage();
+    var message = composeMessage('server', 'RC00000000995cdc89', 'action', 'OP10001');
+
+    return new Promise(function (resolve, reject) {
+        device.publish(TOPIC, JSON.stringify(message), function (err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+
+var openChannel = function (channel) {
+    var device = createAwsIotClient();
+    var message = composeMessage('server', 'RC00000000995cdc89', 'action', 'OP' + channel + '0001');
+
+    return new Promise(function (resolve, reject) {
+        device.publish(TOPIC, JSON.stringify(message), function (err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+
+var closeChannel = function (channel) {
+    var device = createAwsIotClient();
+    var message = composeMessage('server', 'RC00000000995cdc89', 'action', 'CL' + channel + '0001');
 
     return new Promise(function (resolve, reject) {
         device.publish(TOPIC, JSON.stringify(message), function (err, data) {
@@ -54,5 +84,7 @@ var getIoTData = function () {
 }
 
 module.exports = {
-    'getIoTData': getIoTData
+    'getIoTData': getIoTData,
+    'openChannel': openChannel,
+    'closeChannel': closeChannel
 };

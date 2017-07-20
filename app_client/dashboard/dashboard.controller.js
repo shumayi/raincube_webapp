@@ -9,6 +9,7 @@
     var vm = this;
 
     vm.forecasts = [];
+    vm.timeInterval = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
 
     var weatherIcons = {
         "rain": "./images/rc_raining.svg",
@@ -24,8 +25,8 @@
         .success(function(data) {
             setForecastData(data.daily.data);
         })
-        .error(function (e) {
-            console.log(e);
+        .error(function (err) {
+            console.log(err);
         });
 
     function dayAsString(dayIndex) {
@@ -44,8 +45,8 @@
     function setForecastData(forecastData) {
         forecastData.forEach(function (current, index) {
             var forecast = {
-                iconName: current.icon,
-                icon: getWeatherIcon(current.icon),
+                iconName: getWeatherIcon(current.icon).name,
+                icon: getWeatherIcon(current.icon).icon,
                 day: dayAsString(new Date(current.time * 1000).getDay()),
                 rainProbability: Math.floor(current.precipProbability * 100),
                 rainIntensity: (current.precipIntensityMax * 24).toFixed(2),
@@ -62,21 +63,21 @@
             case 'rain':
             case "snow":
             case "sleet":
-                return weatherIcons.rain;
+                return { icon: weatherIcons.rain, name: 'RAINY' };
             case "cloudy":
             case "fog":
             case "partly-cloudy-day":
             case "partly-cloudy-night":
-                return weatherIcons.overcast;
+                return { icon: weatherIcons.overcast, name: 'CLOUDY' };
             case "clear-day":
             case "clear-night":
-                return weatherIcons.sunny;
+                return { icon: weatherIcons.sunny, name: 'SUNNY' };
             case "wind":
-                return weatherIcons.windy;
+                return { icon: weatherIcons.windy, name: 'WINDY' };
             case "thunderstorm":
-                return weatherIcons.lightning;
+                return { icon: weatherIcons.lightning, name: 'STORMY' };
             default:
-                return weatherIcons.sunny;
+                return { icon: weatherIcons.sunny, name: 'SUNNY' };
         }
     }
 
@@ -95,6 +96,10 @@
             default:
                 return {height: "5px", width: "5px"};
         }
+    }
+
+    vm.setTime = function (time) {
+        vm.timeLength = time;
     }
   }
 

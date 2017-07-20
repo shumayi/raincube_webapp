@@ -48,13 +48,41 @@ module.exports = function (app, passport) {
             });
     });
 
-    app.get('/awsiot', function (req, res) {
+    app.get('/awsIot', function (req, res) {
         AWSIoTController.getIoTData()
             .then(function (result) {
                 res.send(result);
             })
             .catch(function (err){
                 res.send('Unable to retrieve data from IoT device.');
+            });
+    });
+
+    app.get('/openChannel/:channel', function (req, res) {
+        if (!req.params.channel) {
+            res.send('Please enter the zone number.');
+        }
+
+        AWSIoTController.openChannel(req.params.channel)
+            .then(function (result) {
+                res.send(result);
+            })
+            .catch(function (err){
+                res.send('Unable to open zone ' + req.params.channel);
+            });
+    });
+
+    app.get('/closeChannel/:channel', function (req, res) {
+        if (!req.params.channel) {
+            res.send('Please enter the zone number.');
+        }
+
+        AWSIoTController.closeChannel(req.params.channel)
+            .then(function (result) {
+                res.send(result);
+            })
+            .catch(function (err){
+                res.send('Unable to close zone ' + req.params.channel);
             });
     });
 

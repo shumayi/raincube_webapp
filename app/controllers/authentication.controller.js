@@ -13,9 +13,9 @@ function generateToken (user) {
 
 function setUserInfo (request) {
     var getUserInfo = {
-        _id: require._id,
-        firstName: request.profile.firstName,
-        lastName: request.profile.lastName,
+        _id: require._id || request.facebook.id,
+        firstName: request.profile.firstName || request.facebook.name.split(" ")[0],
+        lastName: request.profile.lastName || request.facebook.name.split(" ")[1],
         email: request.email,
         role: request.role
     };

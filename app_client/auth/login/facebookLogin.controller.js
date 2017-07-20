@@ -9,6 +9,8 @@
     var vm = this;
 
     authentication.saveToken($routeParams.token);
+
+    $location.path('dashboard');
   }
 
 })();
