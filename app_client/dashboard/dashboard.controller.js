@@ -4,12 +4,9 @@
     .module('raincubeApp')
     .controller('dashboardCtrl', dashboardCtrl);
 
-  dashboardCtrl.$inject = ['$location', 'weather'];
-  function dashboardCtrl($location, weather) {
+  dashboardCtrl.$inject = ['$scope', '$interval', '$location', 'weather'];
+  function dashboardCtrl($scope, $interval, $location, weather) {
     var vm = this;
-
-    vm.forecasts = [];
-    vm.timeInterval = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
 
     var weatherIcons = {
         "rain": "./images/rc_raining.svg",
@@ -18,6 +15,43 @@
         "overcast": "./images/rc_overcast.svg",
         "sunny": "./images/rc_sunny.svg",
         "windy": "./images/rc_windy.svg"
+    }
+
+    vm.forecasts = [];
+    vm.timeLengths = [];
+    vm.timeInterval = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+
+    vm.zones = [
+        { zoneNumber: 1, title:'ZONE 1', countdownInSeconds: 0, countdownInMinutes: 0 },
+        { zoneNumber: 2, title:'ZONE 2', countdownInSeconds: 0, countdownInMinutes: 0 },
+        { zoneNumber: 3, title:'ZONE 3', countdownInSeconds: 0, countdownInMinutes: 0 }
+    ];
+    
+    vm.setTime = function (zone, time) {
+        vm.timeLengths[zone] = time;
+    }
+
+    var stop = [];
+    vm.startCountdown = function (zone) {
+        var countdownTime = vm.timeLengths[zone] * 60;
+
+        stop[zone-1] = $interval(function () {
+            countdownTime--;
+
+            vm.zones[zone-1].countdownInSeconds = Math.floor(countdownTime % 60);
+            vm.zones[zone-1].countdownInMinutes = Math.floor((countdownTime / 60) % 60);
+
+            if (countdownTime <= 0) {
+                vm.stopCountdown(stop[zone-1]);
+            }
+        }, 1000);
+    }
+
+    vm.stopCountdown = function (zone) {
+        if (angular.isDefined(stop[zone-1])) {
+            $interval.cancel(stop[zone-1]);
+            stop[zone-1] = undefined;
+        }
     }
 
     weather
@@ -96,10 +130,6 @@
             default:
                 return {height: "5px", width: "5px"};
         }
-    }
-
-    vm.setTime = function (time) {
-        vm.timeLength = time;
     }
   }
 

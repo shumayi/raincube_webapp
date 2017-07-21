@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module('raincubeApp', ['ngRoute']);
+  angular.module('raincubeApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
   function config ($routeProvider, $locationProvider) {
     $routeProvider
