@@ -4,8 +4,8 @@
     .module('raincubeApp')
     .controller('dashboardCtrl', dashboardCtrl);
 
-  dashboardCtrl.$inject = ['$scope', '$interval', '$location', 'weather'];
-  function dashboardCtrl($scope, $interval, $location, weather) {
+  dashboardCtrl.$inject = ['$scope', '$interval', '$location', 'weather', 'awsIot'];
+  function dashboardCtrl($scope, $interval, $location, weather, awsIot) {
     var vm = this;
 
     var weatherIcons = {
@@ -17,10 +17,12 @@
         "windy": "./images/rc_windy.svg"
     }
 
+    vm.waterLevel = 87;
     vm.forecasts = [];
     vm.timeLengths = [];
     vm.timeInterval = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
 
+    // Open/close zones
     vm.zones = [
         { zoneNumber: 1, title:'ZONE 1', countdownInSeconds: 0, countdownInMinutes: 0 },
         { zoneNumber: 2, title:'ZONE 2', countdownInSeconds: 0, countdownInMinutes: 0 },
@@ -35,25 +37,100 @@
     vm.startCountdown = function (zone) {
         var countdownTime = vm.timeLengths[zone] * 60;
 
-        stop[zone-1] = $interval(function () {
-            countdownTime--;
+        awsIot
+            .openChannel(zone)
+            .success(function(response) {
+                stop[zone-1] = $interval(function () {
+                    countdownTime--;
 
-            vm.zones[zone-1].countdownInSeconds = Math.floor(countdownTime % 60);
-            vm.zones[zone-1].countdownInMinutes = Math.floor((countdownTime / 60) % 60);
+                    vm.zones[zone-1].countdownInSeconds = Math.floor(countdownTime % 60);
+                    vm.zones[zone-1].countdownInMinutes = Math.floor((countdownTime / 60) % 60);
 
-            if (countdownTime <= 0) {
-                vm.stopCountdown(stop[zone-1]);
-            }
-        }, 1000);
+                    if (countdownTime <= 0) {
+                        vm.stopCountdown(stop[zone-1]);
+                    }
+                }, 1000);
+            })
+            .error(function (err) {
+                console.log(err);
+            });
     }
 
     vm.stopCountdown = function (zone) {
-        if (angular.isDefined(stop[zone-1])) {
-            $interval.cancel(stop[zone-1]);
-            stop[zone-1] = undefined;
-        }
+        awsIot
+            .closeChannel(zone)
+            .success(function(response) {
+                if (angular.isDefined(stop[zone-1])) {
+                    $interval.cancel(stop[zone-1]);
+                    stop[zone-1] = undefined;
+                }
+            })
+            .error(function (err) {
+                console.log(err);
+            });
     }
 
+    // Line Chart
+    vm.labels = ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    vm.series = ['GALLONS COLLECTED', 'Zone 1', 'Zone 2', 'Zone 3'];
+    vm.chartData = [
+        [150, 167, 148, 137, 120, 92],
+        [36, 33, 25, 85, 120, 132],
+        [71, 69, 76, 94, 115, 125],
+        [63, 82, 76, 89, 103, 112]
+    ];
+    vm.datasetOverride = [
+        { yAxisID: 'y-axis-1' }, 
+        { yAxisID: 'y-axis-2' }, 
+        { yAxisID: 'y-axis-3' }, 
+        { yAxisID: 'y-axis-4' }
+    ];
+    vm.chartOptions = {
+        scales: {
+            yAxes: [
+                {
+                    id: 'y-axis-1',
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+                {
+                    id: 'y-axis-2',
+                    type: 'linear',
+                    display: false,
+                    position: 'left'
+                },
+                {
+                    id: 'y-axis-3',
+                    type: 'linear',
+                    display: false,
+                    position: 'left'
+                },
+                {
+                    id: 'y-axis-4',
+                    type: 'linear',
+                    display: false,
+                    position: 'left'
+                }
+            ]
+        }
+    };
+
+    // Water Level
+    var waterPercentage = 0;
+    var waterLevelStop = $interval(function () {
+
+        waterPercentage++;
+        vm.waterLevel = waterPercentage;
+
+        vm.transformWaterLevel = 'translate(0'+','+(100-waterPercentage)+'%)';
+
+        if (waterPercentage === 87) {
+            $interval.cancel(waterLevelStop);
+        }
+    }, 60);
+
+    // Forecast data
     weather
         .getForecast('33569')
         .success(function(data) {

@@ -12,9 +12,9 @@ module.exports = {
         'apiKey': '211484f74e6543542ad432b865c3291f'
     },
     'awsIot': {
-        'keyPath': '/Users/tommywu/Documents/raincube_pi/cert/c3daaa6759-private.pem.key',
-        'certPath': '/Users/tommywu/Documents/raincube_pi/cert/c3daaa6759-certificate.pem.crt',
-        'caPath': '/Users/tommywu/Documents/raincube_pi/cert/root_ca.crt',
+        'keyPath': 'C:/cert/c3daaa6759-private.pem.key',
+        'certPath': 'C:/cert/c3daaa6759-certificate.pem.crt',
+        'caPath': 'C:/cert/root_ca.crt',
         'clientId': 'raincube_pi_webapp',
         'host': 'a20mpokpemb1wi.iot.us-east-1.amazonaws.com',
         'port': 8883,

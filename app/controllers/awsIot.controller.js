@@ -17,7 +17,6 @@ function createAwsIotClient () {
 
     device
         .on('connect', function() {
-            console.log('connect');
             device.subscribe(TOPIC);
         });
         

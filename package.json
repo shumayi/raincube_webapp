@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Raincube/raincube-v2#readme",
   "dependencies": {
     "@google/maps": "^0.4.2",
+    "angular-chart.js": "^1.1.1",
     "aws-iot-device-sdk": "^2.0.1",
     "aws-sdk": "^2.6.4",
     "bcrypt-nodejs": "0.0.3",

@@ -21,10 +21,10 @@
                     </svg>
                     <div class="box">
                         <div class="percent">
-                            <div class="percentNum" id="count">0</div>
+                            <div class="percentNum" id="count">{{vm.waterLevel}}</div>
                             <div class="percentB">%</div>
                         </div>
-                        <div id="water" class="water">
+                        <div id="water" class="water" ng-style="{'transform': vm.transformWaterLevel}">
                             <svg viewBox="0 0 560 20" class="water_wave water_wave_back">
                                 <use xlink:href="#wave"></use>
                             </svg>
@@ -63,7 +63,10 @@
             <div class='tile-section no-padding height-auto'>
                 <h2>Monthy Water Collection and Distribution (G)</h2>
                 <div style="width='100%'">
-                    <canvas id="line-chart"></canvas>
+                    <canvas id="line" class="chart chart-line" chart-data="vm.chartData"
+                        chart-labels="vm.labels" chart-series="vm.series" chart-options="vm.chartOptions"
+                        chart-dataset-override="vm.datasetOverride" chart-click="onClick">
+                    </canvas>
                 </div>
             </div>
         </div>
