@@ -24,7 +24,14 @@ var UserSchema = new Schema({
             unique: true
         },
         name: { type: String }
-    }
+    },
+    address: {
+        street: { type: String },
+        city: { type: String },
+        state: { type: String },
+        zipCode: { type: Number }
+    },
+    devices: [String]
 });
  
 UserSchema.pre('save', function (next) {

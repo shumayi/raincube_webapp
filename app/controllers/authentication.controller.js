@@ -23,6 +23,11 @@ function setUserInfo (request) {
     return getUserInfo;
 }
 
+exports.verifyUser = function (authorization) {
+    authorization = authorization.replace('JWT ', '');
+    return jwt.verify(authorization, config.secret);
+};
+
 exports.login = function (req, res, next) {
     var userInfo = setUserInfo(req.user);
 

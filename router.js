@@ -1,6 +1,7 @@
 var AuthenticationController = require('./app/controllers/authentication.controller');
 var WeatherController = require('./app/controllers/weather.controller');
 var AWSIoTController = require('./app/controllers/awsIot.controller');
+var UserController = require('./app/controllers/user.controller');
 var express = require('express');
 var passport = require('passport');
 var passportService = require('./app/config/passport');
@@ -32,6 +33,27 @@ module.exports = function (app, passport) {
             session: false,
             failureRedirect : '/'
         }), AuthenticationController.facebookLogin);
+
+    app.get('/userProfile', requireAuth, function (req, res) {
+        var authorization = req.headers.authorization;
+        var decoded;
+
+        try {
+            decoded = AuthenticationController.verifyUser(authorization);
+        } catch (err) {
+            res.status(401).send('unauthorized');
+        }
+
+        var userEmail = decoded.email;
+
+        UserController.getUserProfile(userEmail)
+            .then(function (user) {
+                res.status(200).send(user);
+            })
+            .catch(function (err) {
+                res.status(500).send('Unable to retrieve user profile');
+            });
+    });
 
     // Get real-time weather/forecast information
     app.get('/forecast/:zipCode', requireAuth, function (req, res) {

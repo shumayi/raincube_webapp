@@ -10,11 +10,27 @@
       <form  class="form-horizontal">
         <div class="form-group">
           <label class="col-sm-3 control-label">Full name</label>
-          <p class="form-control-static">{{ vm.user.name }}</p>
+          <p class="form-control-static">{{ vm.user.fullName }}</p>
         </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Email</label>
           <p class="form-control-static">{{ vm.user.email }}</p>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Address</label>
+          <p class="form-control-static">{{ vm.user.address.street }}</p>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">City</label>
+          <p class="form-control-static">{{ vm.user.address.city }}</p>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">State</label>
+          <p class="form-control-static">{{ vm.user.address.state }}</p>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Zip Code</label>
+          <p class="form-control-static">{{ vm.user.address.zipCode }}</p>
         </div>
       </form>
 
