@@ -8,11 +8,19 @@
   function awsIot ($http) {
 
     openChannel = function(channelNumber) {
-        return $http.get('/openChannel/' + channelNumber);
+        return $http.get('/openChannel/' + channelNumber, {
+          headers: {
+            Authorization: 'JWT '+ authentication.getToken()
+          }
+        });
     };
 
     closeChannel = function(channelNumber) {
-        return $http.get('/closeChannel/' + channelNumber);
+        return $http.get('/closeChannel/' + channelNumber, {
+          headers: {
+            Authorization: 'JWT '+ authentication.getToken()
+          }
+        });
     };
 
     return {
@@ -20,6 +28,4 @@
       closeChannel: closeChannel
     };
   }
-
-
 })();

@@ -19,5 +19,4 @@
       getProfile : getProfile
     };
   }
-
 })();

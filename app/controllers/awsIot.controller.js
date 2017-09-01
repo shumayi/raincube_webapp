@@ -54,7 +54,7 @@ var getIoTData = function () {
 
 var openChannel = function (channel) {
     var device = createAwsIotClient();
-    var message = composeMessage('server', 'RC00000000995cdc89', 'action', 'OP' + channel + '0001');
+    var message = composeMessage('server', 'RC00000000995cdc89', 'action', 'OP' + channel + '1400');
 
     return new Promise(function (resolve, reject) {
         device.publish(TOPIC, JSON.stringify(message), function (err, data) {
@@ -69,7 +69,7 @@ var openChannel = function (channel) {
 
 var closeChannel = function (channel) {
     var device = createAwsIotClient();
-    var message = composeMessage('server', 'RC00000000995cdc89', 'action', 'CL' + channel + '0001');
+    var message = composeMessage('server', 'RC00000000995cdc89', 'action', 'CL' + channel + '1400');
 
     return new Promise(function (resolve, reject) {
         device.publish(TOPIC, JSON.stringify(message), function (err, data) {

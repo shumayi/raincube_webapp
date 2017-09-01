@@ -34,7 +34,7 @@ module.exports = function (app, passport) {
         }), AuthenticationController.facebookLogin);
 
     // Get real-time weather/forecast information
-    app.get('/forecast/:zipCode', function (req, res) {
+    app.get('/forecast/:zipCode', requireAuth, function (req, res) {
         if (!req.params.zipCode) {
             res.send('Please enter the zip code.');
         }
@@ -48,7 +48,7 @@ module.exports = function (app, passport) {
             });
     });
 
-    app.get('/awsIot', function (req, res) {
+    app.get('/awsIot', requireAuth, function (req, res) {
         AWSIoTController.getIoTData()
             .then(function (result) {
                 res.send(result);
@@ -58,7 +58,7 @@ module.exports = function (app, passport) {
             });
     });
 
-    app.get('/openChannel/:channel', function (req, res) {
+    app.get('/openChannel/:channel', requireAuth, function (req, res) {
         if (!req.params.channel) {
             res.send('Please enter the zone number.');
         }
@@ -72,7 +72,7 @@ module.exports = function (app, passport) {
             });
     });
 
-    app.get('/closeChannel/:channel', function (req, res) {
+    app.get('/closeChannel/:channel', requireAuth, function (req, res) {
         if (!req.params.channel) {
             res.send('Please enter the zone number.');
         }
@@ -84,15 +84,5 @@ module.exports = function (app, passport) {
             .catch(function (err){
                 res.send('Unable to close zone ' + req.params.channel);
             });
-    });
-
-    //Dashboards Route
-    // app.get('/dashboard', function (req, res) {
-    //     res.sendFile(__dirname + '/views/dashboard.html');
-    // });
-
-    //MONITOR DE CONEXIONES.
-    app.get('/monitor', requireAuth, function (req, res) {
-        res.sendFile(__dirname + '/views/monitor.html');
     });
 };
