@@ -2,12 +2,12 @@
 
 <div class="container">
   <div class="row">
-    
-     <div class="col-md-6">
+
+    <div class="col-md-6">
 
       <h1 class="form-signin-heading">Your profile</h1>
 
-      <form  class="form-horizontal">
+      <form class="form-horizontal">
         <div class="form-group">
           <label class="col-sm-3 control-label">Full name</label>
           <p class="form-control-static">{{ vm.user.fullName }}</p>
@@ -33,8 +33,44 @@
           <p class="form-control-static">{{ vm.user.address.zipCode }}</p>
         </div>
       </form>
-
+      <button type="button" class="btn btn-default" ng-click="vm.openModal()">Edit</button>
     </div>
 
+    <script type="text/ng-template" id="userModalContent.html">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">User Profile</h3>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <form class="user-profile" >
+          <div class="input-group">
+            <span class="input-group-addon">Address: </span>
+            <input type="text" class="form-control" name="street" placeholder="Address" ng-model="$ctrl.user.address.street">
+          </div>
+          <span class="help-block"></span>
+
+          <div class="input-group">
+            <span class="input-group-addon">City: </span>
+            <input type="text" class="form-control" name="city" placeholder="City" ng-model="$ctrl.user.address.city">
+          </div>
+          <span class="help-block"></span>
+
+          <div class="input-group">
+            <span class="input-group-addon">State: </span>
+            <input type="text" class="form-control" name="state" placeholder="State" ng-model="$ctrl.user.address.state">
+          </div>
+          <span class="help-block"></span>
+
+          <div class="input-group">
+            <span class="input-group-addon">Zip Code: </span>
+            <input type="text" class="form-control" name="zipCode" placeholder="Zip Code" ng-model="$ctrl.user.address.zipCode">
+          </div>
+          <br/>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+      </div>
+    </script>
   </div>
 </div>

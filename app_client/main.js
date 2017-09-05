@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module('raincubeApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'chart.js']);
+  angular.module('raincubeApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'chart.js', 'cp.ngConfirm']);
 
   function config ($routeProvider, $locationProvider) {
     $routeProvider
@@ -22,6 +22,11 @@
       .when('/profile', {
         templateUrl: '/profile/profile.view.html',
         controller: 'profileCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/devices', {
+        templateUrl: '/devices/devices.view.html',
+        controller: 'devicesCtrl',
         controllerAs: 'vm'
       })
       .when('/auth/facebook', {

@@ -20,6 +20,33 @@ var getUserProfile = function (email) {
     });
 }
 
+var updateUserProfile = function (userInfo) {
+    return new Promise(function (resolve, rejeect) {
+        User.findOne({email: userInfo.email})
+            .then(function (user) {
+                var updatedUser = {
+                    address: {
+                        street: userInfo.address.street,
+                        city: userInfo.address.city,
+                        state: userInfo.address.state,
+                        zipCode: userInfo.address.zipCode
+                    }
+                };
+
+                user.set(updatedUser);
+
+                return user.save();
+            })
+            .then(function (saveResult) {
+                resolve(saveResult);
+            })
+            .catch(function (err) {
+                reject(err);
+            });
+    })
+}
+
 module.exports = {
-    'getUserProfile': getUserProfile
+    'getUserProfile': getUserProfile,
+    'updateUserProfile': updateUserProfile
 };

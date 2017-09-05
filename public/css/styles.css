@@ -152,7 +152,11 @@ h1 {
     margin-top: 6vh;
 }
 #logout-button {
-    color: red
+    color: #FF0004;
+}
+
+.text-red {
+    color: #FF0004 !important;
 }
 
 .dropdown-menu {

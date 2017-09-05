@@ -55,6 +55,18 @@ module.exports = function (app, passport) {
             });
     });
 
+    app.post('/updateProfile', requireAuth, function (req, res) {
+        var user = req.body;
+
+        UserController.updateUserProfile(user)
+            .then(function (updateResult) {
+                res.status(204).send(user);
+            })
+            .catch(function (err) {
+                res.status(500).send("Unable to update user");
+            });
+    });
+
     // Get real-time weather/forecast information
     app.get('/forecast/:zipCode', requireAuth, function (req, res) {
         if (!req.params.zipCode) {

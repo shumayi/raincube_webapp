@@ -4,8 +4,8 @@
     .module('raincubeApp')
     .controller('dashboardCtrl', dashboardCtrl);
 
-  dashboardCtrl.$inject = ['$scope', '$interval', '$location', 'weather', 'awsIot'];
-  function dashboardCtrl($scope, $interval, $location, weather, awsIot) {
+  dashboardCtrl.$inject = ['$scope', '$interval', '$location', 'weather', 'awsIot', 'profile'];
+  function dashboardCtrl($scope, $interval, $location, weather, awsIot, profile) {
     var vm = this;
 
     var weatherIcons = {
@@ -131,15 +131,38 @@
     }, 60);
 
     // Forecast data
-    weather
-        .getForecast('33569')
+    var zipCode = '33612';
+
+    profile.getProfile()
+    .success(function(data) {
+        var user = data;
+        var zipCode = '33612';
+
+        if (user.address !== null) {
+            zipCode = user.address.zipCode;
+        }
+
+        weather.getForecast(zipCode)
         .success(function(data) {
             setForecastData(data.daily.data);
         })
         .error(function (err) {
             console.log(err);
         });
+    })
+    .error(function (err) {
+        console.log(err);
 
+        weather.getForecast('33612')
+        .success(function(data) {
+            setForecastData(data.daily.data);
+        })
+        .error(function (err) {
+            console.log(err);
+        });
+    });
+    
+    // Private methods
     function dayAsString(dayIndex) {
         var weekdays = new Array(7);
         weekdays[0] = "SUN";

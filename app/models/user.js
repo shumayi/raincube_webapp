@@ -31,7 +31,13 @@ var UserSchema = new Schema({
         state: { type: String },
         zipCode: { type: Number }
     },
-    devices: [String]
+    devices: [{
+        name: { type: String },
+        id: { 
+            type: String, 
+            unique: true
+        }
+    }]
 });
  
 UserSchema.pre('save', function (next) {
