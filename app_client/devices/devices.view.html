@@ -6,16 +6,43 @@
             <h1 class="form-signin-heading">Your Devices</h1>
 
             <div class="row">
-                <div class="col-md-5">Device Name</div>
-                <div class="col-md-5">Device ID</div>
+                <div class="col-sm-3">Device Name</div>
+                <div class="col-sm-4">Device ID</div>
             </div>
             <hr />
             <div class="row" ng-repeat="device in vm.devices">
-                <div class="col-md-5">{{device.name}}</div>
-                <div class="col-md-5">{{device.id}}</div>
-                <li class="col-md-1" ng-click="vm.edit(device.id)"><a href="#">Edit</a></li>
-                <li class="col-md-1" ng-click="vm.delete(device.id)"><a href="#">Delete</a></li>
+                <div class="col-sm-3">{{device.name}}</div>
+                <div class="col-sm-4">{{device.id}}</div>
+                <li class="col-sm-1" ng-click="vm.editDevice(device.id)"><a href="#">Edit</a></li>
+                <li class="col-sm-1" ng-click="vm.deleteDevice(device.id)"><a href="#">Delete</a></li>
             </div>
         </div>
     </div>
+    <script type="text/ng-template" id="addDeviceModal.html">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">Device</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <form class="add-device" >
+            <div class="input-group">
+              <span class="input-group-addon">Name: </span>
+              <input type="text" class="form-control" name="name" placeholder="Name" ng-model="$ctrl.device.name">
+            </div>
+            <span class="help-block"></span>
+  
+            <div class="input-group">
+              <span class="input-group-addon">ID: </span>
+              <input type="text" class="form-control" name="id" placeholder="id" ng-model="$ctrl.device.id" ng-disabled="$ctrl.disableIdField">
+            </div>
+            <span class="help-block"></span>
+            <br/>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+          <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
+    <br/><br/>
+    <button type="button" class="btn btn-default" ng-click="vm.addDevice()">Add</button>
 </div>

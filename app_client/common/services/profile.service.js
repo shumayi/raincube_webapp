@@ -23,9 +23,36 @@
       });
     };
 
+    var removeDevice = function (deviceId) {
+      return $http.get('/removeDevice/' + deviceId, {
+        headers: {
+          Authorization: 'JWT '+ authentication.getToken()
+        }
+      });
+    }
+
+    var addDevice = function (device) {
+      return $http.post('/addDevice', device, {
+        headers: {
+          Authorization: 'JWT '+ authentication.getToken()
+        }
+      });
+    }
+
+    var editDevice = function (device) {
+      return $http.post('/editDevice', device, {
+        headers: {
+          Authorization: 'JWT '+ authentication.getToken()
+        }
+      });
+    }
+
     return {
       getProfile : getProfile,
-      updateProfile: updateProfile
+      updateProfile: updateProfile,
+      removeDevice: removeDevice,
+      addDevice: addDevice,
+      editDevice: editDevice
     };
   }
 })();

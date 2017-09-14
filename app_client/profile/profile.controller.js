@@ -32,8 +32,12 @@
 
       modalIntance.result.then(function (userInfo) {
         var user = userInfo;
-        console.log(user);
-        profile.updateProfile(userInfo);
+        profile.updateProfile(userInfo)
+          .success(function(data) {
+          })
+          .error(function (err) {
+            console.log(err);
+          });
       }, function () {
         $log.info('Modal dismissed');
       });
@@ -54,7 +58,6 @@
   
       vm.$onInit = function () {
         vm.user = vm.resolve.user;
-        console.log(vm.user);
       };
   
       vm.ok = function () {

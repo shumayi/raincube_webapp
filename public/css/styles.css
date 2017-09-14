@@ -358,3 +358,7 @@ input:checked + .slider:before {
 }
 
 .clock-label{color: #757F81}
+
+li {
+  list-style-type: none;
+}

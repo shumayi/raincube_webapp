@@ -1,4 +1,4 @@
-var User = require('../models/user'); // get the mongoose model
+const User = require('../models/user'); // get the mongoose model
 
 var getUserProfile = function (email) {
     return new Promise(function (resolve, reject) {
@@ -43,10 +43,55 @@ var updateUserProfile = function (userInfo) {
             .catch(function (err) {
                 reject(err);
             });
-    })
+    });
+}
+
+var removeDevice = function (userEmail, deviceId) {
+    return new Promise(function (resolve, rejeect) {
+        User.update( { email: userEmail }, { "$pull": { "devices": { "id": deviceId } } }, { safe: true })
+            .then(function (res) {
+                resolve(res);
+            })
+            .catch(function (err) {
+                reject(err);
+            });
+    });
+}
+
+var addDevice = function (userEmail, device) {
+    return new Promise(function (resolve, rejeect) {
+        User.update( { email: userEmail }, { "$push": { "devices": device } }, { safe: true })
+            .then(function (res) {
+                resolve(res);
+            })
+            .catch(function (err) {
+                reject(err);
+            });
+    });
+};
+
+var editDevice = function (userEmail, device) {
+    return new Promise(function (resolve, rejeect) {
+        User.update( 
+            { 
+                email: userEmail, 
+                devices: { $elemMatch: { id: device.id }} 
+            }, 
+            { "$set": { "devices.$.name": device.name } }, { safe: true }
+        )
+            .then(function (res) {
+                resolve(res);
+            })
+            .catch(function (err) {
+                reject(err);
+            });
+    });
 }
 
 module.exports = {
     'getUserProfile': getUserProfile,
-    'updateUserProfile': updateUserProfile
+    'updateUserProfile': updateUserProfile,
+    'removeDevice': removeDevice,
+    "addDevice": addDevice,
+    "editDevice": editDevice
 };

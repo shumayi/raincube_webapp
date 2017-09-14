@@ -10,8 +10,7 @@
       
       vm.devices = [];
 
-      vm.delete = function (deviceId) {
-        console.log("Hello", deviceId);
+      vm.deleteDevice = function (deviceId) {
         $ngConfirm({
             title: "Delete Device",
             content: 'Are you sure you want to delete this device from your account?',
@@ -21,7 +20,16 @@
                     text: 'Yes',
                     btnClass: 'btn-red',
                     action: function (scope, button) {
-
+                      profile.removeDevice(deviceId)
+                        .success(function(result) {
+                          var devices = vm.devices.filter(function (obj) {
+                            return obj.id !== deviceId;
+                          });
+                          vm.devices = devices;
+                        })
+                        .error(function (err) {
+                          console.log(err);
+                        });
                     }
                 },
                 no: {
@@ -35,14 +43,81 @@
         });
       };
 
-      profile.getProfile()
-      .success(function(data) {
-        var user = data;
-        vm.devices = user.devices;
-      })
-      .error(function (err) {
-        console.log(err);
-      });
-    }
+      vm.addDevice = function (size, parentSelector) {
+        var modalIntance = $uibModal.open({
+          animation: true,
+          component: 'deviceModalComponent'
+        });
   
+        modalIntance.result.then(function (deviceInfo) {
+          profile.addDevice(deviceInfo)
+            .success(function(result) {
+              vm.devices.push(deviceInfo);
+            })
+            .error(function (err) {
+              console.log(err);
+            });
+        }, function () {
+          $log.info('Modal dismissed');
+        });
+      };
+
+      vm.editDevice = function (deviceId, size, parentSelector) {
+        var modalIntance = $uibModal.open({
+          animation: true,
+          component: 'deviceModalComponent',
+          resolve: {
+            device: function () {
+              return vm.devices.filter(function (device) {
+                return device.id === deviceId;
+              });
+            }
+          }
+        });
+  
+        modalIntance.result.then(function (deviceInfo) {
+          profile.editDevice(deviceInfo);
+        }, function () {
+          $log.info('Modal dismissed');
+        });
+      };
+
+      profile.getProfile()
+        .success(function(data) {
+          var user = data;
+          vm.devices = user.devices;
+        })
+        .error(function (err) {
+          console.log(err);
+        });
+    }
+
+    angular
+    .module('raincubeApp')
+    .component('deviceModalComponent', {
+      templateUrl: 'addDeviceModal.html',
+      bindings: {
+        resolve: '<',
+        close: '&',
+        dismiss: '&'
+      },
+      controller: function () {
+        var vm = this;
+
+        vm.$onInit = function () {
+          if (vm.resolve.device) {
+            vm.device = vm.resolve.device[0];
+            vm.disableIdField = true;
+          }
+        };
+    
+        vm.ok = function () {
+          vm.close({$value: vm.device});
+        };
+    
+        vm.cancel = function () {
+          vm.dismiss({$value: 'cancel'});
+        };
+      }
+    });
 })();

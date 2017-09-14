@@ -67,6 +67,72 @@ module.exports = function (app, passport) {
             });
     });
 
+    app.get('/removeDevice/:deviceId', requireAuth, function (req, res) {
+        var authorization = req.headers.authorization;
+        var decoded;
+
+        try {
+            decoded = AuthenticationController.verifyUser(authorization);
+        } catch (err) {
+            res.status(401).send('unauthorized');
+        }
+
+        var userEmail = decoded.email;
+        var deviceId = req.params.deviceId;
+
+        UserController.removeDevice(userEmail, deviceId)
+            .then(function (result) {
+                res.status(200).send(result);
+            })
+            .catch(function (err) {
+                res.status(500).send("Failed to remove device: " + deviceId);
+            })
+    });
+
+    app.post('/addDevice', requireAuth, function (req, res) {
+        var authorization = req.headers.authorization;
+        var decoded;
+
+        try {
+            decoded = AuthenticationController.verifyUser(authorization);
+        } catch (err) {
+            res.status(401).send('unauthorized');
+        }
+
+        var userEmail = decoded.email;
+        var device = req.body;
+
+        UserController.addDevice(userEmail, device)
+            .then(function (result) {
+                res.status(200).send(result);
+            })
+            .catch(function (err) {
+                res.status(500).send("Failed to add device: " + device);
+            })
+    });
+
+    app.post('/editDevice', requireAuth, function (req, res) {
+        var authorization = req.headers.authorization;
+        var decoded;
+
+        try {
+            decoded = AuthenticationController.verifyUser(authorization);
+        } catch (err) {
+            res.status(401).send('unauthorized');
+        }
+
+        var userEmail = decoded.email;
+        var device = req.body;
+
+        UserController.editDevice(userEmail, device)
+            .then(function (result) {
+                res.status(200).send(result);
+            })
+            .catch(function (err) {
+                res.status(500).send("Failed to edit device: " + device);
+            })
+    });
+
     // Get real-time weather/forecast information
     app.get('/forecast/:zipCode', requireAuth, function (req, res) {
         if (!req.params.zipCode) {
